@@ -60,3 +60,13 @@ Widget defaltAppBar({required BuildContext context , Widget? title ,  List<Widge
     actions: actions,
   );
 }
+
+
+Widget MyDivider ()=> Padding(
+  padding: const EdgeInsets.symmetric(vertical: 15.0),
+  child: Container(
+    width: double.infinity,
+    height: 1.0,
+    color: Colors.grey[300],
+  ),
+);
