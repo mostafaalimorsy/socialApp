@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_test/controller/cubit/auth/login/cubit/states.dart';
+import 'package:social_test/controller/service/cash_helper.dart';
 
 
 class SocialLoginCubit extends Cubit<SocialAppLoginStates> {
@@ -20,8 +21,9 @@ class SocialLoginCubit extends Cubit<SocialAppLoginStates> {
   void GetLogin({required String email , required String password })  {
     emit(SocialAppLoadingStates());
     FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
+      var id= value.user!.uid;
       print(value.user!.uid);
-      emit(SocialAppScuccessStates(value.user!.uid));
+      CachHelper.saveData(key: 'uId', value: value.user!.uid).then((value) => emit(SocialAppScuccessStates(id)));
     });
 
 

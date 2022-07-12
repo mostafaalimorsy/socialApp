@@ -6,12 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_test/controller/cubit/social_app/states.dart';
+import 'package:social_test/controller/service/cash_helper.dart';
+import 'package:social_test/controller/service/componans.dart';
 import 'package:social_test/controller/service/constant.dart';
 import 'package:social_test/model/comment_model.dart';
 import 'package:social_test/model/msg_model.dart';
 import 'package:social_test/model/post_mode.dart';
 import 'package:social_test/model/social_user_model.dart';
+import 'package:social_test/view/screen/Auth/login/login_screen.dart';
 import 'package:social_test/view/screen/chats/chats_screen.dart';
+import 'package:social_test/view/screen/new_post/new_post.dart';
 import 'package:social_test/view/screen/news_feed/NewsFeedScreen.dart';
 import 'package:social_test/view/screen/settings/settings_screen.dart';
 import 'package:social_test/view/screen/users/users_screen.dart';
@@ -21,12 +25,12 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
 
   static SocialAppCubit get(context) => BlocProvider.of(context);
 
-
+  bool isDarkModeEnabled=false;
   int currentIndex = 0 ;
   List <Widget> bottomScreen = [
     FeedScreen(),
     ChatScreen(),
-    UsersScreen(),
+    NewPost(),
     UsersScreen(),
     SettingScreen(),
   ];
@@ -41,6 +45,7 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
   void changBottom (int index)
   {
 
+    if(index == 1) getAllUsers();
     if( index == 2)
       {
         emit(SocialNewsPostState());
@@ -52,12 +57,26 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
   }
 
 
+  ThemeMode appMode = ThemeMode.dark;
+
+  void changeAppMode ({bool? fromShared})
+  {
+
+    fromShared !=null ? isDarkModeEnabled =fromShared :
+    isDarkModeEnabled = !isDarkModeEnabled;
+    CachHelper.saveData(key: 'isDark', value: isDarkModeEnabled).then((value) => emit(ChangeModeSocialAppStates()));
+
+  }
+  void onStateChanged(bool isDarkModeEnabled) {
+
+      isDarkModeEnabled = isDarkModeEnabled;
+
+  }
   SocialUserModel? model;
   void getUserData(){
     emit(SocialAppLoadingStates());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       model= SocialUserModel.fromJson(value.data() as Map<String,dynamic>);
-      model!.isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
       print(value.data());
       emit(SocialAppScuccessStates());
     });
@@ -640,16 +659,16 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
       emit(SocialGetMessageSuccessState());
     });
   }
-  //
-  // void signOut(context) {
-  //   FirebaseAuth.instance.signOut().then((value) {
-  //     navigateTo(context, LoginScreen());
-  //     emit(SocialUserSignOutSuccessState());
-  //   }).catchError((erorr) {
-  //     print(erorr.toString());
-  //     emit(SocialUserSignOutErorrState());
-  //   });
-  // }
+
+  void signOut(context) {
+    FirebaseAuth.instance.signOut().then((value) {
+      CachHelper.clearData(key: 'uId').then((value) => navigatTo(context, LoginScreen()));
+      emit(SocialUserSignOutSuccessState());
+    }).catchError((erorr) {
+      print(erorr.toString());
+      emit(SocialUserSignOutErorrState());
+    });
+  }
 
 
 

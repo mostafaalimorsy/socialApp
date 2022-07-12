@@ -7,7 +7,7 @@ import 'package:social_test/controller/service/icon_broken.dart';
 import 'package:social_test/view/screen/settings/edit_profile.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  SettingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +124,13 @@ class SettingScreen extends StatelessWidget {
                   SizedBox(width: 10,),
                   OutlinedButton(onPressed: (){
                     navigatTo(context, EditProfileScreen());
-                  }, child: Icon(IconBroken.Edit_Square))
+                  }, child: Icon(IconBroken.Edit_Square)),
+
+
+
                 ],
-              )
+              ),
+
             ],
           ),
         );

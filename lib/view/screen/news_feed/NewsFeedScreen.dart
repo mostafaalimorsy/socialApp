@@ -27,40 +27,42 @@ class FeedScreen extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  if (FirebaseAuth.instance.currentUser!.emailVerified ||
-                      getData.model!.isEmailVerified != true)
-                    Container(
-                      color: Colors.amber.withOpacity(.6),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.warning),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            const Text("please verify your email"),
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {
-                                FirebaseAuth.instance.currentUser!
-                                    .sendEmailVerification()
-                                    .then((value) {
-                                  msgAlarm(
-                                      msg: "Check your email",
-                                      states: ToastStates.SUCCESS);
-                                });
-                                getData.model!.isEmailVerified = true;
-                              },
-                              child: const Text('send email verification'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // if (FirebaseAuth.instance.currentUser!.emailVerified ||
+                  //     getData.model!.isEmailVerified != true)
+                  //   Container(
+                  //     width: double.infinity,
+                  //     color: Colors.amber.withOpacity(.6),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Row(
+                  //
+                  //         children: [
+                  //           const Icon(Icons.warning),
+                  //           const SizedBox(
+                  //             width: 5.0,
+                  //           ),
+                  //           const Text("please verify your email"),
+                  //           const Spacer(),
+                  //           TextButton(
+                  //             onPressed: () {
+                  //               FirebaseAuth.instance.currentUser!
+                  //                   .sendEmailVerification()
+                  //                   .then((value) {
+                  //                 msgAlarm(
+                  //                     msg: "Check your email",
+                  //                     states: ToastStates.SUCCESS);
+                  //               });
+                  //               getData.model!.isEmailVerified = true;
+                  //             },
+                  //             child: const Text('send email verification'),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     height: 150,
                     width: double.infinity,
@@ -311,8 +313,8 @@ class FeedScreen extends StatelessWidget {
                     ),
                     onTap: () {
                       navigatTo(context, CommentScreen(SocialAppCubit.get(context).postsId[index]));
-                      print(SocialAppCubit.get(context).commentsModel[index] .postId);
-                      print(SocialAppCubit.get(context).postsId[index]);
+                      // print(SocialAppCubit.get(context).commentsModel[index] .postId);
+                      // print(SocialAppCubit.get(context).postsId[index]);
 
                     },
                   ),

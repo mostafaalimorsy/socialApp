@@ -21,77 +21,8 @@ class CommentScreen extends StatelessWidget {
 
         return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(IconBroken.Arrow___Left_2),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
             ),
-            body: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        child: SingleChildScrollView(
-                          child: ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => commentItem(
-                                context,
-                               SocialAppCubit.get(context).commentsModel[index],index),
-                            separatorBuilder: (context, index) =>
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-                            itemCount: cubit.commentsModel.length,
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextField(
-                      controller: _textCommentController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: 'Write a Comment',
-                        hintStyle: const TextStyle(
-                          color: Colors.grey,
-                        ),
-                        prefixIcon: InkWell(
-                          child: const Icon(Icons.camera_alt),
-                          onTap: () {
-                            cubit.getCommentImage();
-                          },
-                        ),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            if (cubit.commentImage == null) {
-                              cubit.createComment(
-                                textComment: _textCommentController.text,
-                                postId: uIdIndex,
-                                uidComment: uIdIndex,
-                              );
-                            } else {
-                              cubit.uploadCommentImage(
-                                textComment: _textCommentController.text,
-                                uidComment: uIdIndex,
-                                postId: uIdIndex,
-                              );
-                            }
-                            _textCommentController.clear();
-                          },
-                          icon: const Icon(
-                            Icons.send,
-                          ),
-                        ),
-                      ),
-                      style: const TextStyle(color: Colors.black, height: 1),
-                    ),
-                  ],
-                )));
+            body: Text("njljn"));
       },
     );
   }

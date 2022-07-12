@@ -178,3 +178,6 @@ class SocialGetWatchLaterSuccessState extends SocialAppStates {}
 class SocialGetWatchLaterLoadingState extends SocialAppStates {}
 
 class SocialGetWatchLaterErorrState extends SocialAppStates {}
+
+
+class ChangeModeSocialAppStates extends SocialAppStates {}

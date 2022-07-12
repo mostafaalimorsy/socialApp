@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_test/controller/cubit/social_app/cubit.dart';
 import 'package:social_test/controller/cubit/social_app/states.dart';
+import 'package:social_test/controller/service/cash_helper.dart';
 import 'package:social_test/controller/service/icon_broken.dart';
 import 'package:social_test/view/widget/custom_widget/custom_auth_button.dart';
 import 'package:social_test/view/widget/custom_widget/custom_textformfield_widget.dart';
@@ -20,7 +21,8 @@ class EditProfileScreen extends StatelessWidget {
       builder: (BuildContext context, SocialAppStates state) {
         SocialAppCubit getData = SocialAppCubit.get(context);
         var userModer = getData.model;
-        namecontroller.text = userModer!.name!;
+        var token= userModer!.uId ;
+        namecontroller.text = userModer.name!;
         emailcontroller.text = userModer.email!;
         phonecontroller.text = userModer.phone!;
         biocontroller.text = userModer.bio!;
@@ -43,10 +45,6 @@ class EditProfileScreen extends StatelessWidget {
                       phone: phonecontroller.text,
                       bio: biocontroller.text,
                       email: emailcontroller.text);
-
-
-
-
                 },
                 child: Text("Update"),
               ),
@@ -62,6 +60,7 @@ class EditProfileScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
+
                   children: [
                     if(state is SocialUpdateUserloadingStates) LinearProgressIndicator(),
                     SizedBox(
@@ -225,7 +224,13 @@ class EditProfileScreen extends StatelessWidget {
                         icon: IconBroken.Message,
                         msg: 'Enter your email',
                         controller: emailcontroller),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+
                   ],
+
                 ),
               ),
             ),
