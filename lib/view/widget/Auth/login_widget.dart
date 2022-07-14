@@ -24,7 +24,7 @@ Widget loginWidget(context, VoidCallback? onpressed) {
           states: ToastStates.SUCCESS,
           textColor: Colors.white,
         );
-        CachHelper.saveData(key: 'uId', value: state.Uid).then((value) {
+        CashHelper.saveData(key: 'uId', value: state.Uid).then((value) {
           navigatReplace(context, const MainScreen());
         });
 

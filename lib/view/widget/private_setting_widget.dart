@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_test/controller/cubit/social_app/cubit.dart';
 import 'package:social_test/controller/cubit/social_app/states.dart';
+import 'package:social_test/controller/service/cash_helper.dart';
 import 'package:social_test/controller/service/constant.dart';
 import 'package:social_test/controller/service/icon_broken.dart';
 
@@ -84,6 +85,7 @@ Widget BuildSideBar(BuildContext context) {
               title: Row(
                 children: [
                   IconButton(onPressed: (){
+                    CashHelper.saveData(key: 'isDark', value: getData.isDarkModeEnabled);
                     getData.changeAppMode();
                   },
                       icon: const Icon(Icons.brightness_4_outlined,

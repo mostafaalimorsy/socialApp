@@ -23,7 +23,7 @@ class SocialLoginCubit extends Cubit<SocialAppLoginStates> {
     FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
       var id= value.user!.uid;
       print(value.user!.uid);
-      CachHelper.saveData(key: 'uId', value: value.user!.uid).then((value) => emit(SocialAppScuccessStates(id)));
+      CashHelper.saveData(key: 'uId', value: value.user!.uid).then((value) => emit(SocialAppScuccessStates(id)));
     });
 
 

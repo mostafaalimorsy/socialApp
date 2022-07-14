@@ -1,0 +1,6 @@
+{
+  "appTitle": "social_test",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}

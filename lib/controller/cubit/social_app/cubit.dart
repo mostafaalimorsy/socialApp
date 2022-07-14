@@ -25,7 +25,7 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
 
   static SocialAppCubit get(context) => BlocProvider.of(context);
 
-  bool isDarkModeEnabled=false;
+
   int currentIndex = 0 ;
   List <Widget> bottomScreen = [
     FeedScreen(),
@@ -57,21 +57,21 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
   }
 
 
+  bool isDarkModeEnabled=false;
   ThemeMode appMode = ThemeMode.dark;
+
 
   void changeAppMode ({bool? fromShared})
   {
 
-    fromShared !=null ? isDarkModeEnabled =fromShared :
-    isDarkModeEnabled = !isDarkModeEnabled;
-    CachHelper.saveData(key: 'isDark', value: isDarkModeEnabled).then((value) => emit(ChangeModeSocialAppStates()));
+    fromShared !=null ? isDarkModeEnabled =fromShared : isDarkModeEnabled = !isDarkModeEnabled;
+    CashHelper.saveData(key: 'isDark', value: isDarkModeEnabled).then((value) {
+      print(value);
+      emit(ChangeModeSocialAppStates());
+    });
 
   }
-  void onStateChanged(bool isDarkModeEnabled) {
 
-      isDarkModeEnabled = isDarkModeEnabled;
-
-  }
   SocialUserModel? model;
   void getUserData(){
     emit(SocialAppLoadingStates());
@@ -662,7 +662,7 @@ class SocialAppCubit extends Cubit<SocialAppStates>{
 
   void signOut(context) {
     FirebaseAuth.instance.signOut().then((value) {
-      CachHelper.clearData(key: 'uId').then((value) => navigatTo(context, LoginScreen()));
+      CashHelper.clearData(key: 'uId').then((value) => navigatTo(context, LoginScreen()));
       emit(SocialUserSignOutSuccessState());
     }).catchError((erorr) {
       print(erorr.toString());

@@ -21,7 +21,7 @@ class FeedScreen extends StatelessWidget {
       builder: (BuildContext context, SocialAppStates state) {
         SocialAppCubit getData = SocialAppCubit.get(context);
         return ConditionalBuilder(
-          condition:  getData.posts.isNotEmpty && getData.model != null  ,
+          condition:  getData.posts.length > 0 && getData.model != null  ,
           builder: (BuildContext context) {
             return SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -64,7 +64,7 @@ class FeedScreen extends StatelessWidget {
                   //   height: 10,
                   // ),
                   Container(
-                    height: 150,
+                    height: 200,
                     width: double.infinity,
                     child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -75,7 +75,7 @@ class FeedScreen extends StatelessWidget {
                             Image.network(
                               'https://img.freepik.com/free-photo/aerial-view-business-team_53876-124515.jpg?t=st=1656880893~exp=1656881493~hmac=2e9749b5f03fd7e500be9b8910e585445094776576e1a3508e5b9ba8b09e2dbe&w=826',
                               fit: BoxFit.cover,
-                              height: 150.0,
+                              height: 200.0,
                               width: double.infinity,
                             ),
                             Padding(
